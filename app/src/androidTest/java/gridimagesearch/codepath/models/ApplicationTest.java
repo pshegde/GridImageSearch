@@ -1,4 +1,4 @@
-package gridimagesearch.codepath.gridimagesearch;
+package gridimagesearch.codepath.models;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
