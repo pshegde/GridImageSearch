@@ -21,7 +21,7 @@ public class ImageDisplayActivity extends ActionBarActivity {
         //remove the actionbar
         getSupportActionBar().hide();
         //pull out the url
-        ImageResult image = (ImageResult) getIntent().getSerializableExtra("image_result");
+        ImageResult image = (ImageResult) getIntent().getParcelableExtra("image_result");
         ImageView ivImageResult = (ImageView) findViewById(R.id.ivFullImage);
         Picasso.with(this).load(Uri.parse(image.getFullUrl())).into(ivImageResult);
     }
