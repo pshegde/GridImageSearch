@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import gridimagesearch.codepath.adapters.ImageResultsAdapter;
 import gridimagesearch.codepath.models.ImageResult;
 import gridimagesearch.codepath.models.R;
+import gridimagesearch.codepath.scrolllistener.EndlessScrollListener;
 
 import static android.widget.AdapterView.OnItemClickListener;
 
@@ -60,6 +61,17 @@ public class SearchActivity extends ActionBarActivity {
                 startActivity(i);
             }
         });
+
+       // Attach the listener to the AdapterView onCreate
+        gvResults.setOnScrollListener(new EndlessScrollListener() {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to your AdapterView
+                customLoadMoreDataFromApi(page, totalItemsCount);
+                // or customLoadMoreDataFromApi(totalItemsCount);
+            }
+        });
     }
 
 
@@ -91,7 +103,7 @@ public class SearchActivity extends ActionBarActivity {
         Toast.makeText(this,query,Toast.LENGTH_SHORT).show();
 
         AsyncHttpClient client = new AsyncHttpClient();
-        String url = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + query + "&rsz=8";
+        String url = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + query + "&rsz=8" ;
         client.get(url,null,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -100,6 +112,42 @@ public class SearchActivity extends ActionBarActivity {
                 try {
                     JSONArray imageResultsJSON = response.getJSONObject("responseData").getJSONArray("results");
                     imageResults.clear(); //clear existing images from the array (in case its a new search)
+                    //when u add to adapter it modifies underlying data
+                    aImageAdapter.addAll(ImageResult.fromJSONArray(imageResultsJSON));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Log.d("INFO",imageResults.toString());
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+            }
+        });
+    }
+
+
+
+    // Append more data into the adapter
+    public void customLoadMoreDataFromApi(int offset,int total) {
+        // This method probably sends out a network request and appends new data items to your adapter.
+        // Use the offset value and add it as a parameter to your API request to retrieve paginated data.
+        // Deserialize API response and then construct new objects to append to the adapter
+        String query = etQuery.getText().toString();
+        //Toast.makeText(this,query,Toast.LENGTH_SHORT).show();
+        String url;
+        url = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + query + "&rsz=8&start=" + offset  ;
+        AsyncHttpClient client = new AsyncHttpClient();
+
+        client.get(url,null,new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                Log.d("DEBUG",response.toString());
+                try {
+                    JSONArray imageResultsJSON = response.getJSONObject("responseData").getJSONArray("results");
+                    //imageResults.clear(); //clear existing images from the array (in case its a new search)
                     //when u add to adapter it modifies underlying data
                     aImageAdapter.addAll(ImageResult.fromJSONArray(imageResultsJSON));
                 } catch (JSONException e) {
