@@ -23,7 +23,7 @@ public class ImageDisplayActivity extends ActionBarActivity {
         //pull out the url
         ImageResult image = (ImageResult) getIntent().getParcelableExtra("image_result");
         ImageView ivImageResult = (ImageView) findViewById(R.id.ivFullImage);
-        Picasso.with(this).load(Uri.parse(image.getFullUrl())).into(ivImageResult);
+        Picasso.with(this).load(Uri.parse(image.getFullUrl())).placeholder(R.drawable.placeholder).into(ivImageResult);
     }
 
 
