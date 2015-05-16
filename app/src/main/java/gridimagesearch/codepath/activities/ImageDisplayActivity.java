@@ -33,7 +33,11 @@ public class ImageDisplayActivity extends ActionBarActivity {
         ImageResult image = (ImageResult) getIntent().getParcelableExtra("image_result");
         ImageView ivImageResult = (ImageView) findViewById(R.id.ivFullImage);
         Picasso.with(this).load(Uri.parse(image.getFullUrl())).fit().placeholder(R.drawable.placeholder).into(ivImageResult);
-        getSupportActionBar().setTitle("View Image");
+        getSupportActionBar().setTitle("");
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.ic_search);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
     }
 
