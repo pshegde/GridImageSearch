@@ -1,6 +1,9 @@
 package gridimagesearch.codepath.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -97,11 +100,20 @@ public class SearchActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private Boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
+    }
+
     //fire when search button is pressed
     public void onImageSearch(View view) {
         String query = etQuery.getText().toString();
-        Toast.makeText(this,query,Toast.LENGTH_SHORT).show();
-
+        if (!isNetworkAvailable()) {
+            Toast.makeText(this, "Please connect to the network and try again!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         AsyncHttpClient client = new AsyncHttpClient();
         String url = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + query + "&rsz=8" ;
         client.get(url,null,new JsonHttpResponseHandler(){
@@ -134,6 +146,12 @@ public class SearchActivity extends ActionBarActivity {
         // This method probably sends out a network request and appends new data items to your adapter.
         // Use the offset value and add it as a parameter to your API request to retrieve paginated data.
         // Deserialize API response and then construct new objects to append to the adapter
+
+        if(offset==8){
+            Toast.makeText(this,"Done with 8 pages",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String query = etQuery.getText().toString();
         //Toast.makeText(this,query,Toast.LENGTH_SHORT).show();
         String url;
