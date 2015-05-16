@@ -142,12 +142,12 @@ public class SearchActivity extends ActionBarActivity {
 
 
     // Append more data into the adapter
-    public void customLoadMoreDataFromApi(int offset,int total) {
+    public void customLoadMoreDataFromApi(int page,int offset) {
         // This method probably sends out a network request and appends new data items to your adapter.
         // Use the offset value and add it as a parameter to your API request to retrieve paginated data.
         // Deserialize API response and then construct new objects to append to the adapter
 
-        if(offset==8){
+        if(page==8){
             Toast.makeText(this,"Done with 8 pages",Toast.LENGTH_SHORT).show();
             return;
         }
