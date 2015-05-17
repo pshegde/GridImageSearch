@@ -42,6 +42,7 @@ public class SettingsFragment extends DialogFragment {
         getDialog().setTitle("Advanced Filters");
         getDialog().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        //getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         View view = inflater.inflate(R.layout.settings_fragment, null);

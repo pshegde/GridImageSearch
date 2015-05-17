@@ -176,14 +176,21 @@ public class SearchActivity extends ActionBarActivity {
         // Deserialize API response and then construct new objects to append to the adapter
 
         if(page==8){
-            Toast.makeText(this,"Done with 8 pages",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this,"Done with 8 pages",Toast.LENGTH_SHORT).show();
             return;
         }
 
         String query = etQuery.getText().toString();
         //Toast.makeText(this,query,Toast.LENGTH_SHORT).show();
-        String url;
-        url = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + query + "&rsz=8&start=" + offset  ;
+        String url= "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + query + "&rsz=8&start=" + offset ;
+        if(imageSize!="" && imageSize != "any")
+            url += "&imgsz=" + imageSize;
+        if(imageColor!="" && imageColor != "")
+            url += "&imgcolor=" + imageColor;
+        if(imageSite!="" && imageSite != "")
+            url += "&as_sitesearch=" + imageSite;
+        if(imageType!="" && imageType != "any")
+            url += "&imgtype=" + imageType;
 
         AsyncHttpClient client = new AsyncHttpClient();
 
