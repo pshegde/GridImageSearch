@@ -14,7 +14,7 @@ Site (espn.com)<br>
 Subsequent searches will have any filters applied to the search results<br>
 User can tap on any image in results to see the image full-screen<br>
 User can scroll down “infinitely” to continue loading more image results (up to 8 pages)<br>
-The following advanced user stories are optional:
+The following advanced user stories implemented are optional:
 
 Advanced: Robust error handling, check if internet is available, handle error cases, network failures<br>
 Advanced: Use the ActionBar SearchView or custom layout as the query box instead of an EditText<br>
