@@ -26,6 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import gridimagesearch.codepath.adapters.ImageResultsAdapter;
+import gridimagesearch.codepath.dialogfragment.SettingsFragment;
 import gridimagesearch.codepath.models.ImageResult;
 import gridimagesearch.codepath.models.R;
 import gridimagesearch.codepath.scrolllistener.EndlessScrollListener;
@@ -38,6 +39,14 @@ public class SearchActivity extends ActionBarActivity {
     private GridView gvResults;
     ArrayList<ImageResult> imageResults;
     private ImageResultsAdapter aImageAdapter;
+    private String imageSize;
+    String[] imageSizes = new String[] {
+            "any", "small", "medium", "large", "xlarge"
+    };
+
+    public void setSize(String text){
+        imageSize = text;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +83,7 @@ public class SearchActivity extends ActionBarActivity {
                 // or customLoadMoreDataFromApi(totalItemsCount);
             }
         });
+        imageSize = "any";
     }
 
 
@@ -94,8 +104,9 @@ public class SearchActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             //display popup to show advanced filters
-
-            Toast.makeText(this,"fff",Toast.LENGTH_SHORT);
+            //Toast.makeText(this,"fff",Toast.LENGTH_SHORT).show();
+            SettingsFragment myfrag = new SettingsFragment();
+            myfrag.show(getFragmentManager(),"Diag");
 
             return true;
         }
@@ -119,6 +130,8 @@ public class SearchActivity extends ActionBarActivity {
         }
         AsyncHttpClient client = new AsyncHttpClient();
         String url = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + query + "&rsz=8" ;
+        if(imageSize!="" && imageSize != "any")
+             url += "&imgsz=" + imageSize;
         client.get(url,null,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -131,6 +144,7 @@ public class SearchActivity extends ActionBarActivity {
                     aImageAdapter.addAll(ImageResult.fromJSONArray(imageResultsJSON));
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(getBaseContext(), "Error while connecting to server!", Toast.LENGTH_SHORT).show();
                 }
                 Log.d("INFO",imageResults.toString());
             }
@@ -159,6 +173,7 @@ public class SearchActivity extends ActionBarActivity {
         //Toast.makeText(this,query,Toast.LENGTH_SHORT).show();
         String url;
         url = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + query + "&rsz=8&start=" + offset  ;
+
         AsyncHttpClient client = new AsyncHttpClient();
 
         client.get(url,null,new JsonHttpResponseHandler(){
