@@ -59,7 +59,7 @@ public class ImageDisplayActivity extends ActionBarActivity {
 //            return true;
 //        }
         int id = item.getItemId();
-        if(id==R.id.miRequestDrink) {
+        if(id==R.id.mishare) {
             //launch a second age form activity
             onShareItem();
         }
@@ -76,7 +76,7 @@ public class ImageDisplayActivity extends ActionBarActivity {
         if (bmpUri != null) {
             // Construct a ShareIntent with link to image
             Intent shareIntent = new Intent();
-            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.setAction(Intent.ACTION_SENDTO);
             shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
             shareIntent.setType("image/*");
             // Launch sharing dialog for image
@@ -113,4 +113,5 @@ public class ImageDisplayActivity extends ActionBarActivity {
         }
         return bmpUri;
     }
+
 }

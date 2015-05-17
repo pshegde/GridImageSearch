@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,6 +45,7 @@ public class SearchActivity extends ActionBarActivity {
     private String imageColor;
     private String imageSite;
     private String imageType;
+    String query;
     String[] imageSizes = new String[] {
             "any", "small", "medium", "large", "xlarge"
     };
@@ -57,8 +60,9 @@ public class SearchActivity extends ActionBarActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.ic_search);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setTitle("");
 
-        etQuery = (EditText) findViewById(R.id.etQuery);
+        //etQuery = (EditText) findViewById(R.id.etQuery);
         gvResults = (GridView) findViewById(R.id.gvResults);
         imageResults = new ArrayList<ImageResult>();
         aImageAdapter = new ImageResultsAdapter(this,imageResults);
@@ -89,6 +93,7 @@ public class SearchActivity extends ActionBarActivity {
         imageType = "any";
         imageColor= "";
         imageSite = "";
+        query="";
     }
 
 
@@ -96,7 +101,22 @@ public class SearchActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_search, menu);
-        return true;
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // perform query here
+                onImageSearch(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -127,8 +147,9 @@ public class SearchActivity extends ActionBarActivity {
     }
 
     //fire when search button is pressed
-    public void onImageSearch(View view) {
-        String query = etQuery.getText().toString();
+    public void onImageSearch(String query) {
+        //String query = etQuery.getText().toString();
+        this.query = query;
         if (!isNetworkAvailable()) {
             Toast.makeText(this, "Please connect to the network and try again!", Toast.LENGTH_SHORT).show();
             return;
@@ -180,7 +201,7 @@ public class SearchActivity extends ActionBarActivity {
             return;
         }
 
-        String query = etQuery.getText().toString();
+        //String query = etQuery.getText().toString();
         //Toast.makeText(this,query,Toast.LENGTH_SHORT).show();
         String url= "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + query + "&rsz=8&start=" + offset ;
         if(imageSize!="" && imageSize != "any")

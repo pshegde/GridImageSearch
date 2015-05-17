@@ -5,8 +5,8 @@
     <!--<item android:id="@+id/action_settings" android:title="@string/action_settings"-->
         <!--android:orderInCategory="100" app:showAsAction="never" />-->
     <item
-        android:id="@+id/miRequestDrink"
-        android:title="RequestDrink"
+        android:id="@+id/mishare"
+        android:title="Share"
         android:icon="@drawable/ic_share"
         app:showAsAction="always"
         />
