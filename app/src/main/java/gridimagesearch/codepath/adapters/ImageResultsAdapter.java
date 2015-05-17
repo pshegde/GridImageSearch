@@ -1,13 +1,11 @@
 package gridimagesearch.codepath.adapters;
 
 import android.content.Context;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -31,11 +29,11 @@ public class ImageResultsAdapter extends ArrayAdapter<ImageResult> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_image_result,parent,false);
         }
         ImageView ivImage = (ImageView) convertView.findViewById(R.id.ivImage);
-        TextView tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
+        //TextView tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
         //clear out the image
         ivImage.setImageResource(0);
 
-        tvTitle.setText(Html.fromHtml(imageInfo.getTitle()));
+       // tvTitle.setText(Html.fromHtml(imageInfo.getTitle()));
         Picasso.with(getContext()).load(imageInfo.getThumbUrl()).placeholder(R.drawable.placeholder).into(ivImage);
         //return the completed view to be displayed
         return convertView;

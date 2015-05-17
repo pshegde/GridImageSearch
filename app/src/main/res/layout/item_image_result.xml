@@ -4,18 +4,18 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="75dp"
+        android:layout_width="match_parent"
         android:layout_height="75dp"
         android:id="@+id/ivImage"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
         android:src="@drawable/placeholder"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/image_title_label"
-        android:id="@+id/tvTitle"
-        android:maxLines="3"
-        android:ellipsize="end"/>
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/image_title_label"-->
+        <!--android:id="@+id/tvTitle"-->
+        <!--android:maxLines="3"-->
+        <!--android:ellipsize="end"/>-->
 </LinearLayout>
