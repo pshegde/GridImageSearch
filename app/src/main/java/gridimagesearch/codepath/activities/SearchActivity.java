@@ -26,7 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import gridimagesearch.codepath.adapters.ImageResultsAdapter;
-import gridimagesearch.codepath.dialogfragment.SettingsFragment;
+import gridimagesearch.codepath.dialogutils.SettingsFragment;
 import gridimagesearch.codepath.models.ImageResult;
 import gridimagesearch.codepath.models.R;
 import gridimagesearch.codepath.scrolllistener.EndlessScrollListener;
@@ -40,13 +40,15 @@ public class SearchActivity extends ActionBarActivity {
     ArrayList<ImageResult> imageResults;
     private ImageResultsAdapter aImageAdapter;
     private String imageSize;
+    private String imageColor;
+    private String imageSite;
+    private String imageType;
     String[] imageSizes = new String[] {
             "any", "small", "medium", "large", "xlarge"
     };
-
-    public void setSize(String text){
-        imageSize = text;
-    }
+    String[] imageTypes = new String[] {
+            "any", "face", "photo", "clipart", "lineart"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +86,9 @@ public class SearchActivity extends ActionBarActivity {
             }
         });
         imageSize = "any";
+        imageType = "any";
+        imageColor= "";
+        imageSite = "";
     }
 
 
@@ -132,6 +137,12 @@ public class SearchActivity extends ActionBarActivity {
         String url = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + query + "&rsz=8" ;
         if(imageSize!="" && imageSize != "any")
              url += "&imgsz=" + imageSize;
+        if(imageColor!="" && imageColor != "")
+            url += "&imgcolor=" + imageColor;
+        if(imageSite!="" && imageSite != "")
+            url += "&as_sitesearch=" + imageSite;
+        if(imageType!="" && imageType != "any")
+            url += "&imgtype=" + imageType;
         client.get(url,null,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -198,4 +209,42 @@ public class SearchActivity extends ActionBarActivity {
             }
         });
     }
+
+    public String[] getImageSizes() {
+        return imageSizes;
+    }
+
+    public String getSize(){
+        return imageSize;
+    }
+    public void setSize(String text){
+        imageSize = text;
+    }
+
+    public String[] getImageTypes() {
+        return imageTypes;
+    }
+
+    public String getType(){
+        return imageType;
+    }
+    public void setType(String text){
+        imageType = text;
+    }
+
+    public String getColor(){
+        return imageColor;
+    }
+
+    public void setColor(String text){
+        imageColor = text;
+    }
+
+    public String getSite(){
+        return imageSite;
+    }
+    public void setSite(String text){
+        imageSite = text;
+    }
+
 }
