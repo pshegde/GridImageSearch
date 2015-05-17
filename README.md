@@ -29,5 +29,6 @@ How many hours did it take to complete? 20<br>
 Resources included via Gradle:<br>
 https://github.com/loopj/android-async-http<br>
 https://github.com/square/picasso<br>
+https://github.com/etsy/AndroidStaggeredGrid<br>
 
 GIF walkthrough of all required and optional stories (using LiceCap)<br>
