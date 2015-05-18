@@ -30,5 +30,6 @@ Resources included via Gradle:<br>
 https://github.com/loopj/android-async-http<br>
 https://github.com/square/picasso<br>
 https://github.com/etsy/AndroidStaggeredGrid<br>
+https://github.com/MikeOrtiz/TouchImageView<br>
 
 GIF walkthrough of all required and optional stories (using LiceCap)<br>
