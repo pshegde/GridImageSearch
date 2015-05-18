@@ -106,16 +106,16 @@ public class SettingsFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 String text = spSize.getSelectedItem().toString();
-                ((SearchActivity)getActivity()).setSize(text);
+                ((SearchActivity)getActivity()).setSize(text.trim());
 
                 text = etColor.getText().toString();
-                ((SearchActivity)getActivity()).setColor(text);
+                ((SearchActivity)getActivity()).setColor(text.trim());
 
                 text = spType.getSelectedItem().toString();
-                ((SearchActivity)getActivity()).setType(text);
+                ((SearchActivity)getActivity()).setType(text.trim());
 
                 text = etSite.getText().toString();
-                ((SearchActivity)getActivity()).setSite(text);
+                ((SearchActivity)getActivity()).setSite(text.trim());
 
                 dismiss();
 

@@ -150,6 +150,11 @@ public class SearchActivity extends ActionBarActivity {
     public void onImageSearch(String query) {
         //String query = etQuery.getText().toString();
         this.query = query;
+        if(query.trim().isEmpty()){
+            Toast.makeText(this, "Please enter a search string!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (!isNetworkAvailable()) {
             Toast.makeText(this, "Please connect to the network and try again!", Toast.LENGTH_SHORT).show();
             return;
@@ -158,12 +163,13 @@ public class SearchActivity extends ActionBarActivity {
         String url = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + query + "&rsz=8" ;
         if(imageSize!="" && imageSize != "any")
              url += "&imgsz=" + imageSize;
-        if(imageColor!="" && imageColor != "")
+        if(!imageColor.isEmpty())
             url += "&imgcolor=" + imageColor;
-        if(imageSite!="" && imageSite != "")
+        if(!imageSite.isEmpty())
             url += "&as_sitesearch=" + imageSite;
         if(imageType!="" && imageType != "any")
             url += "&imgtype=" + imageType;
+        //Toast.makeText(this, url, Toast.LENGTH_LONG).show();
         client.get(url,null,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -173,7 +179,11 @@ public class SearchActivity extends ActionBarActivity {
                     JSONArray imageResultsJSON = response.getJSONObject("responseData").getJSONArray("results");
                     imageResults.clear(); //clear existing images from the array (in case its a new search)
                     //when u add to adapter it modifies underlying data
-                    aImageAdapter.addAll(ImageResult.fromJSONArray(imageResultsJSON));
+                    if(imageResultsJSON.length() == 0) {
+                        aImageAdapter.clear();
+                        Toast.makeText(getBaseContext(), "No results found! Please check the filters", Toast.LENGTH_SHORT).show();
+                    }else
+                        aImageAdapter.addAll(ImageResult.fromJSONArray(imageResultsJSON));
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(getBaseContext(), "Error while connecting to server!", Toast.LENGTH_SHORT).show();
@@ -183,6 +193,7 @@ public class SearchActivity extends ActionBarActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Toast.makeText(getBaseContext(), "The request failed!", Toast.LENGTH_SHORT).show();
                 super.onFailure(statusCode, headers, responseString, throwable);
             }
         });

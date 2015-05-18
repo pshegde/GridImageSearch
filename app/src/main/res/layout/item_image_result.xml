@@ -5,7 +5,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="@dimen/imageHeight"
         android:id="@+id/ivImage"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
