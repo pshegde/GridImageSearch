@@ -10,7 +10,6 @@ import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -21,6 +20,7 @@ import java.io.IOException;
 
 import gridimagesearch.codepath.models.ImageResult;
 import gridimagesearch.codepath.models.R;
+import gridimagesearch.codepath.touchimageview.TouchImageView;
 
 public class ImageDisplayActivity extends ActionBarActivity {
 
@@ -31,7 +31,7 @@ public class ImageDisplayActivity extends ActionBarActivity {
 
         //pull out the url
         ImageResult image = (ImageResult) getIntent().getParcelableExtra("image_result");
-        ImageView ivImageResult = (ImageView) findViewById(R.id.ivFullImage);
+        TouchImageView ivImageResult = (TouchImageView) findViewById(R.id.ivFullImage);
         Picasso.with(this).load(Uri.parse(image.getFullUrl())).fit().placeholder(R.drawable.placeholder).into(ivImageResult);
         getSupportActionBar().setTitle("");
 
@@ -70,7 +70,7 @@ public class ImageDisplayActivity extends ActionBarActivity {
     // Can be triggered by a view event such as a button press
     public void onShareItem() {
         // Get access to bitmap image from view
-        ImageView ivImage = (ImageView) findViewById(R.id.ivFullImage);
+        TouchImageView ivImage = (TouchImageView) findViewById(R.id.ivFullImage);
         // Get access to the URI for the bitmap
         Uri bmpUri = getLocalBitmapUri(ivImage);
         if (bmpUri != null) {
@@ -89,7 +89,7 @@ public class ImageDisplayActivity extends ActionBarActivity {
     }
 
     // Returns the URI path to the Bitmap displayed in specified ImageView
-    public Uri getLocalBitmapUri(ImageView imageView) {
+    public Uri getLocalBitmapUri(TouchImageView imageView) {
         // Extract Bitmap from ImageView drawable
         Drawable drawable = imageView.getDrawable();
         Bitmap bmp = null;
