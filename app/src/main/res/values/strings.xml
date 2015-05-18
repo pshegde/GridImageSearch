@@ -11,5 +11,10 @@
     <string name="settings_color_filter">Color Filter</string>
     <string name="settings_image_type">Image Type</string>
     <string name="settings_site">Site</string>
+    <string name="error_search_string">Please enter a search string!</string>
+    <string name="error_network_string">Please connect to the network and try again!</string>
+    <string name="error_no_results_string">No results found! Please check the filters</string>
+    <string name="error_conn_server_string">Error while connecting to server!</string>
+    <string name="error_req_failed_string">The request failed!</string>
 
 </resources>

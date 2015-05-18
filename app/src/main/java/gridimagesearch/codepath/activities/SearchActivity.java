@@ -151,12 +151,12 @@ public class SearchActivity extends ActionBarActivity {
         //String query = etQuery.getText().toString();
         this.query = query;
         if(query.trim().isEmpty()){
-            Toast.makeText(this, "Please enter a search string!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.error_search_string, Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (!isNetworkAvailable()) {
-            Toast.makeText(this, "Please connect to the network and try again!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.error_network_string, Toast.LENGTH_SHORT).show();
             return;
         }
         AsyncHttpClient client = new AsyncHttpClient();
@@ -181,19 +181,19 @@ public class SearchActivity extends ActionBarActivity {
                     //when u add to adapter it modifies underlying data
                     if(imageResultsJSON.length() == 0) {
                         aImageAdapter.clear();
-                        Toast.makeText(getBaseContext(), "No results found! Please check the filters", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(), R.string.error_no_results_string, Toast.LENGTH_SHORT).show();
                     }else
                         aImageAdapter.addAll(ImageResult.fromJSONArray(imageResultsJSON));
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(getBaseContext(), "Error while connecting to server!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), R.string.error_conn_server_string, Toast.LENGTH_SHORT).show();
                 }
                 Log.d("INFO",imageResults.toString());
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Toast.makeText(getBaseContext(), "The request failed!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), R.string.error_req_failed_string, Toast.LENGTH_SHORT).show();
                 super.onFailure(statusCode, headers, responseString, throwable);
             }
         });
@@ -238,12 +238,14 @@ public class SearchActivity extends ActionBarActivity {
                     aImageAdapter.addAll(ImageResult.fromJSONArray(imageResultsJSON));
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(getBaseContext(), R.string.error_conn_server_string, Toast.LENGTH_SHORT).show();
                 }
                 Log.d("INFO",imageResults.toString());
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Toast.makeText(getBaseContext(), R.string.error_req_failed_string, Toast.LENGTH_SHORT).show();
                 super.onFailure(statusCode, headers, responseString, throwable);
             }
         });
