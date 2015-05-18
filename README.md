@@ -21,7 +21,7 @@ Advanced: Use the ActionBar SearchView or custom layout as the query box instead
 Advanced: User can share an image to their friends or email it to themselves<br>
 Advanced: Replace Filter Settings Activity with a lightweight modal overlay<br>
 Advanced: Improve the user interface and experiment with image assets and/or styling and coloring<br>
-Bonus: Use the StaggeredGridView to display improve the grid of image results<br>
+Bonus: Use the StaggeredGridView to display improve the grid of image results. Got an issue with this described below<br>
 Bonus: User can zoom or pan images displayed in full-screen detail view<br>
 
 How many hours did it take to complete? 20<br>
@@ -33,3 +33,12 @@ https://github.com/etsy/AndroidStaggeredGrid<br>
 https://github.com/MikeOrtiz/TouchImageView<br>
 
 GIF walkthrough of all required and optional stories (using LiceCap)<br>
+
+
+
+
+
+Issue with staggeredview. On scrolling down many images are repeating. Also on scrolling up images are lost. Please let me know what I am missing. Thank you.
+
+
+
