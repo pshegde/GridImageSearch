@@ -1,6 +1,6 @@
 # GridImageSearch
 Android app client for Grid image search
-This app is developed using the requirements provided here
+This app is developed using the requirements provided at: http://courses.codepath.com/courses/intro_to_android/week/2#!assignment
 
 User stories implemented are:
 
