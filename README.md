@@ -35,10 +35,10 @@ https://github.com/MikeOrtiz/TouchImageView<br>
 GIF walkthrough of all required and optional stories (using LiceCap)<br>
 
 
-
+![alt tag] (https://github.com/pshegde/GridImageSearch/blob/master/gifs/walkthrough_final.gif)
 
 
 Issue with staggeredview. On scrolling down many images are repeating. Also on scrolling up images are lost. Please let me know what I am missing. Thank you.
 
-
+![alt tag] (https://github.com/pshegde/GridImageSearch/blob/master/gifs/walk.gif)
 
