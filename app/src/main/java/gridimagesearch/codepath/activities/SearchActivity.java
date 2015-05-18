@@ -33,8 +33,6 @@ import gridimagesearch.codepath.models.ImageResult;
 import gridimagesearch.codepath.models.R;
 import gridimagesearch.codepath.scrolllistener.EndlessScrollListener;
 
-import static android.widget.AdapterView.OnItemClickListener;
-
 
 public class SearchActivity extends ActionBarActivity {
     private EditText etQuery;
@@ -68,7 +66,7 @@ public class SearchActivity extends ActionBarActivity {
         aImageAdapter = new ImageResultsAdapter(this,imageResults);
         //link the adapter to the adapterview(gridview)
         gvResults.setAdapter(aImageAdapter );
-        gvResults.setOnItemClickListener(new OnItemClickListener() {
+        gvResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -170,25 +168,25 @@ public class SearchActivity extends ActionBarActivity {
         if(imageType!="" && imageType != "any")
             url += "&imgtype=" + imageType;
         //Toast.makeText(this, url, Toast.LENGTH_LONG).show();
-        client.get(url,null,new JsonHttpResponseHandler(){
+        client.get(url, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
-                Log.d("DEBUG",response.toString());
+                Log.d("DEBUG", response.toString());
                 try {
                     JSONArray imageResultsJSON = response.getJSONObject("responseData").getJSONArray("results");
                     imageResults.clear(); //clear existing images from the array (in case its a new search)
                     //when u add to adapter it modifies underlying data
-                    if(imageResultsJSON.length() == 0) {
+                    if (imageResultsJSON.length() == 0) {
                         aImageAdapter.clear();
                         Toast.makeText(getBaseContext(), R.string.error_no_results_string, Toast.LENGTH_SHORT).show();
-                    }else
+                    } else
                         aImageAdapter.addAll(ImageResult.fromJSONArray(imageResultsJSON));
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(getBaseContext(), R.string.error_conn_server_string, Toast.LENGTH_SHORT).show();
                 }
-                Log.d("INFO",imageResults.toString());
+                Log.d("INFO", imageResults.toString());
             }
 
             @Override
