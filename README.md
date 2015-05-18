@@ -16,15 +16,15 @@ User can tap on any image in results to see the image full-screen<br>
 User can scroll down “infinitely” to continue loading more image results (up to 8 pages)<br>
 The following advanced user stories implemented are optional:
 
-Advanced: Robust error handling, check if internet is available, handle error cases, network failures<br>
-Advanced: Use the ActionBar SearchView or custom layout as the query box instead of an EditText<br>
-Advanced: User can share an image to their friends or email it to themselves<br>
-Advanced: Replace Filter Settings Activity with a lightweight modal overlay<br>
-Advanced: Improve the user interface and experiment with image assets and/or styling and coloring<br>
-Bonus: Use the StaggeredGridView to display improve the grid of image results. Got an issue with this described below<br>
-Bonus: User can zoom or pan images displayed in full-screen detail view<br>
+Robust error handling, check if internet is available, handle error cases, network failures<br>
+Use the ActionBar SearchView or custom layout as the query box instead of an EditText<br>
+User can share an image to their friends or email it to themselves<br>
+Replace Filter Settings Activity with a lightweight modal overlay<br>
+Improve the user interface and experiment with image assets and/or styling and coloring<br>
+Use the StaggeredGridView to display improve the grid of image results. Got an issue with this described below. So reverted this.<br>
+User can zoom or pan images displayed in full-screen detail view<br>
 
-How many hours did it take to complete? 20<br>
+How many hours did it take to complete? 22<br>
 
 Resources included via Gradle:<br>
 https://github.com/loopj/android-async-http<br>
